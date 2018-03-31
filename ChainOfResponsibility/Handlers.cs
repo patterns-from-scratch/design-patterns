@@ -19,13 +19,12 @@ namespace ChainOfResponsibility
     {
         public abstract IOfferInterface Offer { get; }
 
-        // Loan event 
+        // Request event 
         public EventHandler<RequestEventArgs> RequestEvent;
 
-        // Loan event handler
+        // Request event handler
         public abstract void RequestHandler(object sender, RequestEventArgs e);
 
-        // Constructor
         public Selector()
         {
             RequestEvent += RequestHandler;
@@ -36,7 +35,7 @@ namespace ChainOfResponsibility
             OnRequest(new RequestEventArgs { Request = request });
         }
 
-        // Invoke the Loan event
+        // Invoke the Request event
         public virtual void OnRequest(RequestEventArgs e)
         {
             if (RequestEvent != null)
