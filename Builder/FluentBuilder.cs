@@ -22,7 +22,7 @@ namespace Builder
         public string Name { get; private set; }
         public List<string> Components { get; }
 
-        private FluentBuilder() { this.Components = new List<string>(); }
+        private FluentBuilder() => this.Components = new List<string>();
 
         public static INumberHolder CreateProduct { get => new FluentBuilder(); }
         public INameHolder WithNumber(int number) { this.Number = number; return this; }

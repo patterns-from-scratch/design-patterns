@@ -1,4 +1,5 @@
-﻿using System;
+using ChainOfResponsibility.Generic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace ChainOfResponsibility
     {
         static void Main(string[] args)
         {
+            new ChainLink<int>(e => false, e => { },
+                new ChainLink<int>(new Specification(), e => e.ToString())).TryProcess(int.MinValue);
+
             // Customers requests
             var request1 = new CustomerRequest() { DesiredSpeed = 10 };
             var request2 = new CustomerRequest() { DesiredSpeed = 30 };
