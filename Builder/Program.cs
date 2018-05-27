@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Builder
 {
@@ -32,7 +32,7 @@ namespace Builder
 
         public static int H(FluentProduct fluent, int i) => fluent.GetHashCode() + i;
 
-        public static string S(Product p, Product s) => $"{p.ToString()},{s.ToString(), {KK}}";
+        public static string S(Product p, Product s) => $"{p.ToString()},{s}{KK}";
 
         public static FluentProduct FluentProduct(string component) => FluentBuilder.CreateProduct.WithNumber(1).WithName("").WithComponent(component).AndNothingMore();
     }

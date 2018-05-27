@@ -11,8 +11,27 @@ namespace ChainOfResponsibility
     {
         static void Main(string[] args)
         {
+            new int[0].Select(x =>
+            {
+                return
+                    new ChainLink<int, IObject>(e => false, e => new CustomerRequest(),
+                    new ChainLink<int, IObject>(Singleton.Instance, e => new AlternativeRequest(e),
+                    new ChainLink<int, IObject>(e => false, e => new VoidRequest()
+                    ))).Transform(int.MinValue, new VoidRequest());
+            })
+            .OfType<IObject>();
+
+
             new ChainLink<int>(e => false, e => { },
-                new ChainLink<int>(new Specification(), e => e.ToString())).TryProcess(int.MinValue);
+            new ChainLink<int>(new Specification(), e => e.ToString()
+            )).Process(int.MinValue, e => { });
+
+            var @object =
+                new ChainLink<int, IObject>(e => false, e => new CustomerRequest(),
+                new ChainLink<int, IObject>(Singleton.Instance, e => new AlternativeRequest(e),
+                new ChainLink<int, IObject>(e => false, e => new VoidRequest())
+                )).Transform(int.MinValue, new VoidRequest());
+
 
             // Customers requests
             var request1 = new CustomerRequest() { DesiredSpeed = 10 };

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -111,11 +111,30 @@ namespace ChainOfResponsibility
         }
     }
 
+    public interface IObject
+    {
+
+    }
+
     /// <summary>
     /// Keeps request details
     /// </summary>
-    class CustomerRequest
+    class CustomerRequest : IObject
     {
         public int DesiredSpeed { get; set; }
+    }
+
+    class AlternativeRequest : IObject
+    {
+        public AlternativeRequest(int number)
+        {
+            Number = number;
+        }
+
+        public int Number { get; }
+    }
+
+    class VoidRequest : IObject
+    {
     }
 }
